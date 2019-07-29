@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "52704381254",
+    "firebase_url": "https://tulink-7abe3.firebaseio.com",
+    "project_id": "tulink-7abe3",
+    "storage_bucket": "tulink-7abe3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52704381254:android:090f667ff937f8d3",
+        "android_client_info": {
+          "package_name": "com.polotechnologies.tulink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52704381254-9b0s19o41vusgrt36cojbr8logfov4ht.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.polotechnologies.tulink",
+            "certificate_hash": "2eab6b733af4bcf6a2836ea25ac518cdcb8fa8db"
+          }
+        },
+        {
+          "client_id": "52704381254-mgi1v5rm37vvnbrhfrd2fd3bjqj8i1p1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdtveowruoQdmloHoEvIqLEAjaI-OO4_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52704381254-mgi1v5rm37vvnbrhfrd2fd3bjqj8i1p1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

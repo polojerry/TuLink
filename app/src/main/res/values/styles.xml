@@ -1,0 +1,34 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+    <style name="AppTheme.Launcher" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/launcher_background</item>
+    </style>
+
+    <style name="Widget.TuLink.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextAppearance">@color/colorAccent</item>
+        <item name="hintTextColor">@color/colorAccent</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="boxStrokeColor">@color/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.NameHeading" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    
+    <style name="Fab" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="srcCompat">@drawable/ic_send_black</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:tint">@android:color/white</item>
+    </style>
+
+</resources>

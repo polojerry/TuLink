@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph_home"
+            app:startDestination="@id/chatsFragment">
+    <fragment
+            android:id="@+id/chatsFragment"
+            android:name="com.polotechnologies.tulink.ChatsFragment"
+            android:label="@string/fragment_label_chats"
+            tools:layout="@layout/fragment_chats">
+        <action
+                android:id="@+id/action_chatsFragment_to_messagesFragment"
+                app:destination="@id/messagesFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/profileFragment"
+            android:name="com.polotechnologies.tulink.ProfileFragment"
+            android:label="@string/fragment_label_profile"
+            tools:layout="@layout/fragment_profile"/>
+    <fragment
+            android:id="@+id/findMatchFragment"
+            android:name="com.polotechnologies.tulink.FindMatchFragment"
+            android:label="@string/fragment_label_find_match"
+            tools:layout="@layout/fragment_find_match"/>
+    <fragment
+            android:id="@+id/messagesFragment"
+            android:name="com.polotechnologies.tulink.MessagesFragment"
+            android:label="fragment_messages"
+            tools:layout="@layout/fragment_messages"/>
+</navigation>
