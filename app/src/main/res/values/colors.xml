@@ -15,4 +15,5 @@
     <!--colors used in chats-->
     <color name="colorMessageSentBackground">#FF5252</color>
     <color name="colorMessageReceivedBackground">#3359DF</color>
+    <color name="colorTypeMessageBackground">#7575</color>
 </resources>

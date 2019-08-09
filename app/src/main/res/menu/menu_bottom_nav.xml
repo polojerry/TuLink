@@ -3,18 +3,24 @@
 
     <item
             android:title="@string/menu_tittle_chats"
-            android:id="@+id/chatsFragment"
+            android:id="@+id/chatsFragment3"
             android:icon="@drawable/ic_chat"
             />
     <item
             android:title="@string/menu_tittle_find_match"
-            android:id="@+id/findMatchFragment"
+            android:id="@+id/findMatchFragment3"
             android:icon="@drawable/ic_heart_circle"
             />
     <item
-            android:title="@string/menu_tittle_profile"
-            android:id="@+id/profileFragment"
-            android:icon="@drawable/ic_account_circle"
+            android:title="@string/menu_tittle_notifications"
+            android:id="@+id/notificationFragment2"
+            android:icon="@drawable/ic_notifications"
+            />
+
+    <item
+            android:title="@string/menu_tittle_links"
+            android:id="@+id/linksFragment2"
+            android:icon="@drawable/ic_people"
             />
 
 </menu>

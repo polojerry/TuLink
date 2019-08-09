@@ -1,80 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-        android:layout_margin="4dp">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        >
 
     <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="4dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/materialCardView">
+            app:layout_constraintBottom_toBottomOf="parent">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_profile_pic_find_match"
                     android:contentDescription="@string/content_description_user_profile_picture"
-                    android:layout_width="200dp"
+                    android:layout_width="150dp"
                     android:layout_height="150dp"
+                    android:padding="4dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/polo_profile"
+                    tools:src="@drawable/polo_profile"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            android:background="@color/colorTextIcon"
-            app:cardBackgroundColor="@color/colorTextIcon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="140dp"
-            app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHorizontal_bias="0.6"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_profile_name_find_match"
-                    tools:text="Jeremiah Polo"
                     android:textStyle="bold"
                     android:textSize="18sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:layout_marginStart="16dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    app:layout_constraintTop_toBottomOf="@+id/img_profile_pic_find_match"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="Jeremiah Polo"
+                    android:textAlignment="center"/>
+
+            <View
+                    android:id="@+id/find_match_online_status"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    tools:background="@drawable/offline_dot"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_profile_location_find_match"
-                    tools:text="Siaya"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_profile_name_find_match"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textSize="14sp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -11,7 +11,7 @@
                 android:radius="20dp"
                 android:bottomRightRadius="0dp" />
 
-            <solid android:color="@color/colorMessageSentBackground" />
+            <solid android:color="@color/colorPrimary" />
 
             <size
                 android:width="0dp"
