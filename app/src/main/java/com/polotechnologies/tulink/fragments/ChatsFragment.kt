@@ -3,11 +3,10 @@ package com.polotechnologies.tulink.fragments
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.DataBindingUtil
+import androidx.emoji.widget.EmojiTextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -48,11 +47,9 @@ class ChatsFragment : Fragment() {
         mDatabaseReference = FirebaseDatabase.getInstance().reference
         currentUid = mAuth.currentUser?.uid.toString()
 
-
         val layoutManager = LinearLayoutManager(context)
-        /*val dividerItemDecoration = DividerItemDecoration(context,layoutManager.orientation)*/
         binding.rvChats.layoutManager = layoutManager
-        /*binding.rvChats.addItemDecoration(dividerItemDecoration)*/
+
 
         loadChats()
 
@@ -110,15 +107,48 @@ class ChatsFragment : Fragment() {
                     }
 
                     override fun onChildRemoved(dataSnapshot: DataSnapshot) {
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        val lastMessage = dataSnapshot.child("message").value.toString()
+                        var messageSentTime = 0L
+                        if(dataSnapshot.child("timeStamp").value != null){
+                            messageSentTime = dataSnapshot.child("timeStamp").value as Long
+                        }
+
+                        val timeAgoConverter =  TimeAgo()
+                        val messageSentTimeString = timeAgoConverter.getTimeAgo(messageSentTime)
+
+                        val isSeen = model.isSeen!!
+
+                        holder.setLastMessage(lastMessage, isSeen,messageSentTimeString )
                     }
 
                     override fun onChildMoved(dataSnapshot: DataSnapshot, p1: String?) {
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        val lastMessage = dataSnapshot.child("message").value.toString()
+                        var messageSentTime = 0L
+                        if(dataSnapshot.child("timeStamp").value != null){
+                            messageSentTime = dataSnapshot.child("timeStamp").value as Long
+                        }
+
+                        val timeAgoConverter =  TimeAgo()
+                        val messageSentTimeString = timeAgoConverter.getTimeAgo(messageSentTime)
+
+                        val isSeen = model.isSeen!!
+
+                        holder.setLastMessage(lastMessage, isSeen,messageSentTimeString )
                     }
 
                     override fun onChildChanged(dataSnapshot: DataSnapshot, p1: String?) {
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        val lastMessage = dataSnapshot.child("message").value.toString()
+                        var messageSentTime = 0L
+                        if(dataSnapshot.child("timeStamp").value != null){
+                            messageSentTime = dataSnapshot.child("timeStamp").value as Long
+                        }
+
+                        val timeAgoConverter =  TimeAgo()
+                        val messageSentTimeString = timeAgoConverter.getTimeAgo(messageSentTime)
+
+                        val isSeen = model.isSeen!!
+
+                        holder.setLastMessage(lastMessage, isSeen,messageSentTimeString )
                     }
 
                     override fun onCancelled(databaseError: DatabaseError) {
@@ -167,7 +197,7 @@ class ChatsFragment : Fragment() {
         var uId = ""
         var profilePicture : CircleImageView = itemView.findViewById(R.id.img_profile_pic_chats)
         var profileName : AppCompatTextView = itemView.findViewById(R.id.tv_profile_name_chats)
-        var lastMessage : AppCompatTextView = itemView.findViewById(R.id.tv_last_message_chat)
+        var lastMessage : EmojiTextView = itemView.findViewById(R.id.tv_last_message_chat)
         var messageSentTime : AppCompatTextView = itemView.findViewById(R.id.tv_last_message_chat_time)
         var onlineStatus : View = itemView.findViewById(R.id.chat_is_online)
 
@@ -199,4 +229,6 @@ class ChatsFragment : Fragment() {
 
 
     }
+
+
 }

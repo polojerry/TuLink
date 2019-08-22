@@ -2,12 +2,13 @@
 
 <layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                       xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                       xmlns:tools="http://schemas.android.com/tools"
-                                                       android:layout_width="match_parent"
-                                                       android:layout_height="match_parent"
-                                                       tools:context=".fragments.FindMatchFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".fragments.FindMatchFragment">
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_find_match"
@@ -16,7 +17,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                app:spanCount="3"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:listitem="@layout/item_find_match"/>
 

@@ -7,7 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.provider.FontRequest
 import androidx.databinding.DataBindingUtil
+import androidx.emoji.text.EmojiCompat
+import androidx.emoji.text.FontRequestEmojiCompatConfig
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -31,6 +34,8 @@ class LoginFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_login,container,false)
 
+        binding.loginProgressBar.visibility = View.GONE
+
         mAuth = FirebaseAuth.getInstance()
 
         if(mAuth.currentUser!=null){
@@ -45,7 +50,22 @@ class LoginFragment : Fragment() {
             loginUser()
         }
 
+        requestEmoji()
+
         return binding.root
+    }
+
+    private fun requestEmoji() {
+        val fontRequest = FontRequest(
+            "com.google.android.gms.fonts",
+            "com.google.android.gms",
+            "Noto Color Emoji Compat",
+            R.array.com_google_android_gms_fonts_certs
+        )
+        val config = FontRequestEmojiCompatConfig(context!!, fontRequest)
+            .setReplaceAll(true)
+        EmojiCompat.init(config)
+
     }
 
     private fun loginUser() {
@@ -53,9 +73,11 @@ class LoginFragment : Fragment() {
 
         val userEmail = binding.etEmailLogin.text.toString().trim()
         val userPass  =  binding.etPassLogin.text.toString().trim()
+        binding.loginProgressBar.visibility = View.VISIBLE
 
         mAuth.signInWithEmailAndPassword(userEmail, userPass)
             .addOnCompleteListener {
+                binding.loginProgressBar.visibility = View.GONE
                 if(it.isSuccessful){
                     Toast.makeText(context,"Login Successful",Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)

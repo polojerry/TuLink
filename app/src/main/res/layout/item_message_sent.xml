@@ -17,7 +17,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginTop="4dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.emoji.widget.EmojiTextView
                 android:paddingStart="6dp"
                 android:id="@+id/tv_message"
                 android:layout_width="wrap_content"

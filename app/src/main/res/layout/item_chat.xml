@@ -39,7 +39,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="4dp"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.emoji.widget.EmojiTextView
                 android:id="@+id/tv_last_message_chat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

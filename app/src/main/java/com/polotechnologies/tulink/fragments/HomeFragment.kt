@@ -3,10 +3,14 @@ package com.polotechnologies.tulink.fragments
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.PopupMenu
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -20,12 +24,11 @@ import com.google.firebase.database.ServerValue
  * A simple [Fragment] subclass.
  *
  */
-class HomeFragment : Fragment(),PopupMenu.OnMenuItemClickListener {
+class HomeFragment : Fragment() {
 
     lateinit var binding : FragmentHomeBinding
     lateinit var mAuth:FirebaseAuth
     lateinit var databaseReference: DatabaseReference
-    lateinit var popUpListener: PopupMenu.OnMenuItemClickListener
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,25 +42,36 @@ class HomeFragment : Fragment(),PopupMenu.OnMenuItemClickListener {
         binding.btmNavHome
             .setupWithNavController(navController = navHostFragment.navController)
 
-        setHasOptionsMenu(true)
+        navHostFragment.navController.addOnDestinationChangedListener{_, destination,_ ->
+            binding.homeFragmentToolbar.title = destination.label
 
-        popUpListener = this
+        }
 
         mAuth = FirebaseAuth.getInstance()
-        navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
-            binding.tvFragmentTittle.text = destination.label
+
+        binding.homeFragmentToolbar.inflateMenu(R.menu.menu_main)
+        binding.homeFragmentToolbar.setOnMenuItemClickListener { item ->
+            when(item!!.itemId){
+                R.id.action_logOut -> {
+                    mAuth.signOut()
+                    Toast.makeText(context, "Logged Out Successfully", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+                    true
+                }
+                R.id.action_settings->{
+                    Toast.makeText(context, "Settings", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else->{
+                    false
+                }
+
+            }
         }
 
-        binding.actionLogOut.setOnClickListener{
-            showMenu(it)
-        }
 
         return binding.root
-    }
 
-
-    private fun signOut() {
-        mAuth.signOut()
     }
 
     override fun onStart() {
@@ -81,28 +95,6 @@ class HomeFragment : Fragment(),PopupMenu.OnMenuItemClickListener {
                 .child(currentUserId)
                 .child("online")
                 .setValue(ServerValue.TIMESTAMP)
-        }
-    }
-
-    fun showMenu(v: View) {
-        PopupMenu(context!!, v).apply {
-            // MainActivity implements OnMenuItemClickListener
-            setOnMenuItemClickListener(this@HomeFragment.popUpListener)
-            inflate(R.menu.menu_main)
-            show()
-        }
-    }
-
-    override fun onMenuItemClick(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_logOut -> {
-                signOut()
-                true
-            }
-            R.id.action_settings -> {
-                true
-            }
-            else -> false
         }
     }
 }

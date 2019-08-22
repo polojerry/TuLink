@@ -1,6 +1,7 @@
 package com.polotechnologies.tulink.fragments
 
 
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -41,7 +43,7 @@ class FindMatchFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_find_match, container, false)
-        binding.rvFindMatch.layoutManager = GridLayoutManager(context,2)
+        binding.rvFindMatch.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         mAuth = FirebaseAuth.getInstance()
         //FirebaseDatabase.getInstance().setPersistenceEnabled(true)
         loadMatches()
@@ -93,7 +95,7 @@ class FindMatchFragment : Fragment() {
 
     class ProfileHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        var profilePicture: AppCompatImageView = itemView.findViewById(R.id.img_profile_pic_find_match)
+        var profilePicture: CircleImageView = itemView.findViewById(R.id.img_profile_pic_find_match)
         var profileName: AppCompatTextView = itemView.findViewById(R.id.tv_profile_name_find_match)
         var profileOnline: View = itemView.findViewById(R.id.find_match_online_status)
 
