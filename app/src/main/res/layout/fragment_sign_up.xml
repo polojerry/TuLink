@@ -63,29 +63,6 @@
                     android:hint="@string/hint_password"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textLayoutConfirmPassSignUp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/colorDivider"
-                app:passwordToggleDrawable="@drawable/toggle_pass"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textLayoutPassSignUp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_confirm_pass_sign_up"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="textPassword"
-                    android:hint="@string/hint_confirm_password"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
 
         <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_sign_up_user"
@@ -95,7 +72,7 @@
                 android:layout_marginEnd="32dp"
                 android:text="@string/btn_text_sign_up"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textLayoutConfirmPassSignUp"/>
+                app:layout_constraintTop_toBottomOf="@+id/textLayoutPassSignUp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

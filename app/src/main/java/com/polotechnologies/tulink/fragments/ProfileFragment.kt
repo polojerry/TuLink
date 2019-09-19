@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -216,17 +217,23 @@ class ProfileFragment : Fragment() {
         if(binding.etSignUpProfileName.text.isNullOrEmpty()){
             binding.etSignUpProfileName.error = "Required"
             return
+        }else if (imageUri == null){
+            Toast.makeText(context, "Picture Required", Toast.LENGTH_SHORT).show()
+            return
         }
         val userID = mAuth.currentUser?.uid
 
         val storageReference = mStorageReference.child("profileImages/$userID.png")
-        val uploadTask = storageReference.putFile(imageUri!!)
+        val uploadTask = storageReference.putFile(imageUri)
 
         uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
             if (!task.isSuccessful) {
                 task.exception?.let {
                     throw it
                 }
+            }else{
+                Toast.makeText(context, "Profile Updated", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
             }
             return@Continuation storageReference.downloadUrl
         }).addOnCompleteListener { task ->
@@ -235,8 +242,7 @@ class ProfileFragment : Fragment() {
                 uploadProfileDetails(downloadUri)
 
             } else {
-                // Handle failures
-                // ...
+
             }
         }
 
@@ -252,8 +258,6 @@ class ProfileFragment : Fragment() {
         val profile  = Profile(userId, profileImageUrl,userName,"", "",ServerValue.TIMESTAMP)
         if (userId != null) {
             mDatabaseReference.child(userId).setValue(profile).addOnSuccessListener {
-                Toast.makeText(context,"Profile Updated",Toast.LENGTH_SHORT).show()
-                //findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
             }.addOnFailureListener{
                 Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
             }

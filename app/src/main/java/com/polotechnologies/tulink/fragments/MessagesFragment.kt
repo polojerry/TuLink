@@ -22,8 +22,9 @@ import com.polotechnologies.tulink.utils.TimeAgo
 import com.polotechnologies.tulink.dataModels.Message
 import com.polotechnologies.tulink.dataModels.Profile
 import com.polotechnologies.tulink.databinding.FragmentMessagesBinding
-import hani.momanii.supernova_emoji_library.Actions.EmojIconActions
-import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.collections.HashMap
 
 
@@ -149,14 +150,18 @@ class MessagesFragment : Fragment() {
 
     private fun sendMessage(receiverUid: String) {
 
-        var message = ""
-
-        if (binding.etMessageInput.text.toString().isNotEmpty()) {
-            message = binding.etMessageInput.text.toString().trim()
+        if (binding.etMessageInput.text.toString().isEmpty()) {
+            Toast.makeText(context, "Cant Send Empty Message",Toast.LENGTH_SHORT).show()
+            return
         }
+
+        val message = binding.etMessageInput.text.toString().trim()
+
         binding.etMessageInput.text?.clear()
 
         val currentUserId: String = mAuth.currentUser?.uid!!
+
+        createChatIfNotExist(currentUserId,receiverUid)
 
         val userReference = "messages/$currentUserId/$receiverUid"
         val receiverReference = "messages/$receiverUid/$currentUserId"
@@ -273,10 +278,15 @@ class MessagesFragment : Fragment() {
         private val messageSentTime: AppCompatTextView = itemView.findViewById(R.id.sentTime)
 
         fun bind(message: Message) {
-            val timeStampLong = message.timeStamp.toString().toLongOrNull()
+            val timeStampLong = message.timeStamp.toString().toLong()
+
+            val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)
+            val sdf = SimpleDateFormat("HH:mm a", Locale.ENGLISH)
+
+            val dateString = sdf.format(timeStampLong)
 
             messageReceivedSent.text = message.message
-            messageSentTime.text = timeStampLong.toString()
+            messageSentTime.text = dateString.toString()
         }
 
     }

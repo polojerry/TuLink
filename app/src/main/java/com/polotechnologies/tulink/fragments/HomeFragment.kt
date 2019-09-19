@@ -53,6 +53,14 @@ class HomeFragment : Fragment() {
         binding.homeFragmentToolbar.setOnMenuItemClickListener { item ->
             when(item!!.itemId){
                 R.id.action_logOut -> {
+                    val currentUserId = mAuth.currentUser?.uid
+                    if(currentUserId?.isNotEmpty()!!){
+                        databaseReference.child("users")
+                            .child(currentUserId)
+                            .child("online")
+                            .setValue(ServerValue.TIMESTAMP)
+                    }
+
                     mAuth.signOut()
                     Toast.makeText(context, "Logged Out Successfully", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
@@ -68,33 +76,10 @@ class HomeFragment : Fragment() {
 
             }
         }
-
-
         return binding.root
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        val currentUserId = mAuth.currentUser?.uid
-        if(currentUserId?.isNotEmpty()!!){
-            databaseReference
-                .child("users")
-                .child(currentUserId)
-                .child("online")
-                .setValue("online")
-        }
 
-    }
 
-    override fun onStop() {
-        super.onStop()
-        val currentUserId = mAuth.currentUser?.uid
-        if(currentUserId?.isNotEmpty()!!){
-            databaseReference.child("users")
-                .child(currentUserId)
-                .child("online")
-                .setValue(ServerValue.TIMESTAMP)
-        }
-    }
 }

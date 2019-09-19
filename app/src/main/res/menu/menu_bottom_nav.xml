@@ -18,9 +18,9 @@
             />
 
     <item
-            android:title="@string/menu_tittle_links"
-            android:id="@+id/linksFragment2"
-            android:icon="@drawable/ic_people"
+            android:title="@string/action_profile"
+            android:id="@+id/profileSettingFragment"
+            android:icon="@drawable/ic_account_circle"
             />
 
 </menu>

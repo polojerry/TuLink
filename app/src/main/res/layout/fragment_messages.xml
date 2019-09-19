@@ -43,7 +43,7 @@
                             android:contentDescription="@string/content_description_user_profile_picture"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/polo_profile"
+                            android:src="@drawable/placeholder"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_marginTop="10dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -124,7 +124,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/smiley" />
+                        app:srcCompat="@drawable/ic_smiley_picker" />
 
                 <androidx.emoji.widget.EmojiEditText
                         android:id="@+id/et_message_input"

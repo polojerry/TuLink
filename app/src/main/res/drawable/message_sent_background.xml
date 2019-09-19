@@ -9,7 +9,7 @@
 
             <corners
                 android:radius="20dp"
-                android:bottomRightRadius="0dp" />
+                android:topRightRadius="0dp" />
 
             <solid android:color="@color/colorPrimary" />
 
@@ -29,7 +29,7 @@
 
             <corners
                 android:radius="20dp"
-                android:bottomRightRadius="0dp" />
+                android:topRightRadius="0dp" />
 
             <solid android:color="@color/colorMessageSentBackground" />
 

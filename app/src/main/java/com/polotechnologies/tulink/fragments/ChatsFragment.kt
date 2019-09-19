@@ -22,7 +22,10 @@ import com.polotechnologies.tulink.dataModels.Profile
 import com.polotechnologies.tulink.databinding.FragmentChatsBinding
 import com.polotechnologies.tulink.utils.TimeAgo
 import de.hdodenhof.circleimageview.CircleImageView
-import androidx.recyclerview.widget.DividerItemDecoration
+import java.text.DateFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -87,68 +90,78 @@ class ChatsFragment : Fragment() {
                 val chatUid = getRef(position).key!!
 
                 val lastMessageQuery : Query = FirebaseDatabase.getInstance().reference
-                    .child("messages").child(currentUid).child(chatUid).limitToLast(1)
+                    .child("messages")
+                    .child(currentUid).child(chatUid)
+                    .limitToLast(1)
 
                 lastMessageQuery.addChildEventListener(object : ChildEventListener{
 
                     override fun onChildAdded(dataSnapshot: DataSnapshot, p1: String?) {
                         val lastMessage = dataSnapshot.child("message").value.toString()
-                        var messageSentTime = 0L
+                        var messageSentTime= 0L
                         if(dataSnapshot.child("timeStamp").value != null){
-                            messageSentTime = dataSnapshot.child("timeStamp").value as Long
+                            messageSentTime = dataSnapshot.child("timeStamp").value.toString().toLong()
                         }
 
-                        val timeAgoConverter =  TimeAgo()
-                        val messageSentTimeString = timeAgoConverter.getTimeAgo(messageSentTime)
+                        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)
+                        val sdf = SimpleDateFormat("HH:mm a", Locale.ENGLISH)
+
+                        val dateString = sdf.format(messageSentTime)
 
                         val isSeen = model.isSeen!!
 
-                        holder.setLastMessage(lastMessage, isSeen,messageSentTimeString )
+                        holder.setLastMessage(lastMessage, isSeen,dateString)
                     }
 
                     override fun onChildRemoved(dataSnapshot: DataSnapshot) {
                         val lastMessage = dataSnapshot.child("message").value.toString()
-                        var messageSentTime = 0L
+                        var messageSentTime= 0L
                         if(dataSnapshot.child("timeStamp").value != null){
-                            messageSentTime = dataSnapshot.child("timeStamp").value as Long
+                            messageSentTime = dataSnapshot.child("timeStamp").value.toString().toLong()
                         }
 
-                        val timeAgoConverter =  TimeAgo()
-                        val messageSentTimeString = timeAgoConverter.getTimeAgo(messageSentTime)
+                        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)
+                        val sdf = SimpleDateFormat("HH:mm a", Locale.ENGLISH)
+
+                        val dateString = sdf.format(messageSentTime)
 
                         val isSeen = model.isSeen!!
 
-                        holder.setLastMessage(lastMessage, isSeen,messageSentTimeString )
+                        holder.setLastMessage(lastMessage, isSeen,dateString)
                     }
 
                     override fun onChildMoved(dataSnapshot: DataSnapshot, p1: String?) {
                         val lastMessage = dataSnapshot.child("message").value.toString()
-                        var messageSentTime = 0L
+                        var messageSentTime= 0L
                         if(dataSnapshot.child("timeStamp").value != null){
-                            messageSentTime = dataSnapshot.child("timeStamp").value as Long
+                            messageSentTime = dataSnapshot.child("timeStamp").value.toString().toLong()
                         }
 
-                        val timeAgoConverter =  TimeAgo()
-                        val messageSentTimeString = timeAgoConverter.getTimeAgo(messageSentTime)
+                        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)
+                        val sdf = SimpleDateFormat("HH:mm a", Locale.ENGLISH)
+
+                        val dateString = sdf.format(messageSentTime)
 
                         val isSeen = model.isSeen!!
 
-                        holder.setLastMessage(lastMessage, isSeen,messageSentTimeString )
+                        holder.setLastMessage(lastMessage, isSeen,dateString)
                     }
 
                     override fun onChildChanged(dataSnapshot: DataSnapshot, p1: String?) {
                         val lastMessage = dataSnapshot.child("message").value.toString()
-                        var messageSentTime = 0L
+                        var messageSentTime= 0L
                         if(dataSnapshot.child("timeStamp").value != null){
-                            messageSentTime = dataSnapshot.child("timeStamp").value as Long
+                            messageSentTime = dataSnapshot.child("timeStamp").value.toString().toLong()
                         }
 
-                        val timeAgoConverter =  TimeAgo()
-                        val messageSentTimeString = timeAgoConverter.getTimeAgo(messageSentTime)
+                        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)
+                        val sdf = SimpleDateFormat("HH:mm a", Locale.ENGLISH)
+
+                        val dateString = sdf.format(messageSentTime)
 
                         val isSeen = model.isSeen!!
 
-                        holder.setLastMessage(lastMessage, isSeen,messageSentTimeString )
+                        holder.setLastMessage(lastMessage, isSeen,dateString)
                     }
 
                     override fun onCancelled(databaseError: DatabaseError) {
@@ -227,8 +240,6 @@ class ChatsFragment : Fragment() {
 
         }
 
-
     }
-
 
 }

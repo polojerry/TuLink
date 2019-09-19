@@ -55,7 +55,7 @@ class SignUpFragment : Fragment() {
 
             }.addOnFailureListener(OnFailureListener {
                 Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
-                Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show()
+
             })
 
     }
@@ -73,26 +73,7 @@ class SignUpFragment : Fragment() {
             return false
         }
 
-        if (binding.etConfirmPassSignUp.text.toString().trim().isBlank()) {
-            binding.etConfirmPassSignUp.error = "Required"
-            return false
-        }
-
-        return if (binding.etPassSignUp.text.toString().trim() ==
-            binding.etConfirmPassSignUp.text.toString().trim()
-        ) {
-
-            true
-
-        } else {
-            Toast.makeText(context, "Password Don't Match", Toast.LENGTH_SHORT).show()
-            binding.etPassSignUp.text?.clear()
-            binding.etConfirmPassSignUp.text?.clear()
-
-            binding.etPassSignUp.requestFocus()
-
-            false
-        }
+        return true
 
     }
 

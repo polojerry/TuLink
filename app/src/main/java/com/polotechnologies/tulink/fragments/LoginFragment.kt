@@ -13,9 +13,11 @@ import androidx.emoji.text.EmojiCompat
 import androidx.emoji.text.FontRequestEmojiCompatConfig
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
 import com.polotechnologies.tulink.R
 import com.polotechnologies.tulink.databinding.FragmentLoginBinding
+import java.lang.Exception
 
 /**
  * A simple [Fragment] subclass.
@@ -34,7 +36,7 @@ class LoginFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_login,container,false)
 
-        binding.loginProgressBar.visibility = View.GONE
+        /*binding.loginProgressBar.visibility = View.GONE*/
 
         mAuth = FirebaseAuth.getInstance()
 
@@ -73,22 +75,19 @@ class LoginFragment : Fragment() {
 
         val userEmail = binding.etEmailLogin.text.toString().trim()
         val userPass  =  binding.etPassLogin.text.toString().trim()
-        binding.loginProgressBar.visibility = View.VISIBLE
+        /*binding.loginProgressBar.visibility = View.VISIBLE*/
 
         mAuth.signInWithEmailAndPassword(userEmail, userPass)
-            .addOnCompleteListener {
-                binding.loginProgressBar.visibility = View.GONE
-                if(it.isSuccessful){
-                    Toast.makeText(context,"Login Successful",Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                }else{
-                    Toast.makeText(context,"Incorrect Email/ Password",Toast.LENGTH_SHORT).show()
-                    binding.etEmailLogin.text?.clear()
-                    binding.etPassLogin.text?.clear()
-                    binding.etEmailLogin.requestFocus()
+            .addOnSuccessListener {
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                Toast.makeText(context,"Login Successful",Toast.LENGTH_SHORT).show()
+
+            }.addOnFailureListener(object : OnFailureListener{
+                override fun onFailure(p0: Exception) {
 
                 }
-            }
+
+            })
     }
 
     private fun verifyUserDetails(): Boolean {
@@ -104,4 +103,6 @@ class LoginFragment : Fragment() {
         }
         return true
     }
+
+
 }

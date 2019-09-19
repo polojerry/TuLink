@@ -19,12 +19,14 @@
 
         <androidx.emoji.widget.EmojiTextView
                 android:paddingStart="6dp"
+                android:paddingEnd="6dp"
                 android:id="@+id/tv_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Hello how have you been"
                 android:textColor="@color/colorTextIcon"
                 android:textSize="16sp"
+                android:maxWidth="200dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="4dp"
